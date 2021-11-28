@@ -11,7 +11,7 @@ jobs:
   ## GitHub Actions Workflow does not support yaml anchors
   ## and that is why there is a workaround with make-workflows.sh
   ## You should `pre-commit install` or use `pre-commit-hook.sh`,
-  ## anyway please read .github/README.md
+  ## anyway please read https://github.com/kuvaldini/make-workflows.sh#readme
   check_workflow_yaml_coressponds_to_src_yaml:
     runs-on: ubuntu-20.04
     name: Check if github workflows were properly made from sources
