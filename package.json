@@ -21,5 +21,8 @@
    "bin": {
       "make-workflows": "./make-workflows.sh"
    },
-   "license": "MIT"
+   "license": "MIT",
+   "dependencies": {
+      "make-workflows.sh": "github:kuvaldini/make-workflows.sh"
+   }
 }

@@ -21,6 +21,9 @@ Options:
                     instead of git index
    -h, --help       show this help
    -x, --trace, +x, --no-trace   enable/disable bash trace
+   -i, --install
+   --update
+   -V, --version
 END
    exit
 }
@@ -31,6 +34,9 @@ files_list(){
 }
 file_contents(){
    git show $(printf ":%s " $@)
+}
+curl_release(){
+   curl 'https://raw.githubusercontent.com/kuvaldini/make-workflows.sh/main/make-workflows.sh' -LsSf "$@"
 }
 
 while [[ $# > 0 ]] ;do
@@ -56,9 +62,25 @@ while [[ $# > 0 ]] ;do
          if test "" != "${BASH_SOURCE[0]:-}" ;then
             cp "${BASH_SOURCE[0]}" "$install_path"
          else
-            curl -LsSf 'https://raw.githubusercontent.com/kuvaldini/make-workflows.sh/main/make-workflows.sh' >"$install_path"
+            curl_release >"$install_path"
          fi
          chmod +x "$install_path"
+         exit
+         ;;
+      --update)
+         TEMP=`mktemp`
+         curl_release -o $TEMP
+         chmod +x $TEMP
+         if diff -q "${BASH_SOURCE[0]}" $TEMP &>/dev/null ;then
+            echomsg "Already up to date."
+            rm -f $TEMP
+            exit
+         else
+            exec mv $TEMP $(readlink -f "${BASH_SOURCE[0]}")
+         fi
+         ;;
+      -V|--version)
+         echo "make-workflows.sh version 1.0.0"
          exit
          ;;
       -*)

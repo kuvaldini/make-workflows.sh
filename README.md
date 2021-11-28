@@ -51,6 +51,25 @@ repos:
     files: '.github/.*\.src\.ya?ml'
     pass_filenames: false
 ```
+kuvaldini/make-workflows.sh
+## Ways to install
+1. raw by hand
+```
+curl 'https://raw.githubusercontent.com/kuvaldini/make-workflows.sh/main/make-workflows.sh' -LsSf >make-workflows.sh && chmod +x make-workflows.sh
+```
+
+2. using own facility, installs to /usr/local/bin
+```
+curl 'https://raw.githubusercontent.com/kuvaldini/make-workflows.sh/main/make-workflows.sh' -LsSf | bash -s -- --install
+```
+
+3. node package manager
+```
+npm install kuvaldini/make-workflows.sh
+```
+or `npm install git+https://github.com/kuvaldini/make-workflows.sh`
+
+4. TODO webinstall
 
 
 ### Links

@@ -3,7 +3,7 @@ repos:
   hooks:
   - id: make-workflows
     name: Make GitHub workflows from *.src.yml
-    entry: bash -c '.github/make-workflows.sh && git add .github/workflows'
+    entry: bash -c './make-workflows.sh && git add .github/workflows'
     language: system
     files: '.github/.*\.src\.ya?ml'
     pass_filenames: false
