@@ -54,7 +54,7 @@ while [[ $# > 0 ]] ;do
       +x|--no-trace) set +x ;;
       -h|--help|'-?') --help ;;
       -i|--install)
-         install_path="${install_dir:='/usr/local/bin'}/make-workflows.sh"
+         install_path="${install_dir:=/usr/local/bin}/make-workflows.sh"
          touch "$install_path" 2>&- || {
             echo >&2 "Cannot touch '$install_path'. "\
             "Check if directory exists and you have enough access rights!"
@@ -105,11 +105,12 @@ while [[ $# > 0 ]] ;do
    shift
 done
 
-readonly script_dir=$(dirname $(realpath "$0"))
-readonly repo_root=$(git rev-parse --show-toplevel)
-readonly dirs_from=${dirs_from:-${repo_root}/.github}
-         dir_to=${dir_to:-$repo_root/.github/workflows}
-readonly dir_to=$(realpath $dir_to)
+script_dir=$(dirname $(realpath "$0"))
+repo_root=$(git rev-parse --show-toplevel)
+dirs_from=${dirs_from:-${repo_root}/.github}
+dir_to=${dir_to:-$repo_root/.github/workflows}
+dir_to=$(realpath $dir_to)
+readonly script_dir repo_root dirs_from dir_to
 
 if test "${dirs_from:-}" = ""
 then echo >&2 "make-workflows: ERROR: dirs_from is not set, arguments required."; exit 1
