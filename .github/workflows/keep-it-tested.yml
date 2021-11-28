@@ -1,0 +1,32 @@
+## DO NOT EDIT
+## Generated from keep-it-tested.src.yml with make-workflows.sh
+
+name: keep-it-tested
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '12 22 * * *'
+jobs:
+  ## GitHub Actions Workflow does not support yaml anchors
+  ## and that is why there is a workaround with make-workflows.sh
+  ## You should `pre-commit install` or use `pre-commit-hook.sh`,
+  ## anyway please read .github/README.md
+  check_workflow_yaml_coressponds_to_src_yaml:
+    runs-on: ubuntu-20.04
+    name: Check if github workflows were properly made from sources
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - run: sudo snap install yq
+      - name: Check if .github/workflows/*.yml correspond to *.src.yml
+        run: |
+          set -x
+          [[ $(./.github/make-workflows.sh -x --worktree) = *"everything is up to date" ]]
+  say_hello:
+    runs-on: ubuntu-20.04
+    needs: check_workflow_yaml_coressponds_to_src_yaml
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - run: cat README.md
