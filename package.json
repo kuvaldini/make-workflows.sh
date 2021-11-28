@@ -1,0 +1,25 @@
+{
+   "name": "make-workflows.sh",
+   "description": "A tool to support YAML anchors for GitHub Actions Workflows – do not repeat code for GHA",
+   "version": "1.0.0",
+   "homepage": "https://github.com/kuvaldini/make-workflows.sh",
+   "keywords": [
+      "github",
+      "actions",
+      "workflow",
+      "ci/cd"
+   ],
+   "author": {
+      "name": "Ivan Kuvaldini",
+      "url": "https://github.com/kuvaldini"
+   },
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/kuvaldini/make-workflows.sh"
+   },
+   "main": "./make-workflows.sh",
+   "bin": {
+      "make-workflows": "./make-workflows.sh"
+   },
+   "license": "MIT"
+}
