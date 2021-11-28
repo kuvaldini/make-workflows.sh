@@ -25,7 +25,6 @@ jobs:
         run: |
           set -x
           [[ $(./.github/make-workflows.sh -x --worktree) = *"everything is up to date" ]]
-      #TEST
 
   say_hello:
     runs-on: ubuntu-20.04
