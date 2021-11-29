@@ -2,13 +2,15 @@ make-workflows.sh for GitHub Actions
 ====================================
 
 GitHub Workflow description in YAML does not support anchors.
-There are several workarounds => anyway they come to building-editing workflow yaml from source.
+There are several workarounds => anyway [they](#links) come to building-editing workflow yaml from source.
 So I suggest yet another one `make-workflows.sh` based on YAML tool [`yq`](https://github.com/mikefarah/yq) version 4.
 
+<sub>\<spoiler\>All these code and repo is written around `yq eval 'explode(.)'`\</spoiler\></sub>
+
 ### USAGE
-0. Put your workflows to `.github/*.src.yml`
-1. Put `make-workflows.sh` to directory `.github/`
-2. (recommended) `pre-commit install`  
+0. [Install](#ways-to-install) `make-workflows.sh` to reachable place inside or outside of your repo, i.e. '.github/'
+1. Put your workflows to `.github/*.src.yml`
+2. (recommended) `pre-commit install` and edit [`.pre-commit-config.yaml`](/.pre-commit-config.yaml) according to where `make-workflows.sh` is placed.
    <sub>(altenative optional) Copy or link `pre-commit-hook.sh` to `.git/hooks/pre-commit`  
    Like `ln -s ../../.github/pre-commit-hook.sh .git/hooks/pre-commit`</sub>
 
@@ -32,14 +34,14 @@ Options:
     +x, --no-trace   enable/disable bash trace
 ```
 
-### Using pre-commit
+### Automate using pre-commit (recommended)
 There is a nice tool [pre-commit](https://pre-commit.com) to do checks and some actions just before commit. The tool is called by Git pre-commit hook.
 
 Making workflows is better being automated – just 
 ```sh
 $ pre-commit install
 ```
-and add next sample to `.pre-commit-config.yaml`
+and add next sample to [`.pre-commit-config.yaml`](/.pre-commit-config.yaml)
 ```yaml
 repos:
 - repo: local
@@ -51,7 +53,8 @@ repos:
     files: '.github/.*\.src\.ya?ml'
     pass_filenames: false
 ```
-kuvaldini/make-workflows.sh
+> NOTE: pay attention to path to make-workflows.sh if it is installed to your system
+
 ## Ways to install
 1. raw by hand
 ```
@@ -62,6 +65,7 @@ curl 'https://raw.githubusercontent.com/kuvaldini/make-workflows.sh/main/make-wo
 ```
 curl 'https://raw.githubusercontent.com/kuvaldini/make-workflows.sh/main/make-workflows.sh' -LsSf | bash -s -- --install
 ```
+> NOTE: may require `...| sudo bash...`
 
 3. node package manager
 ```
@@ -79,6 +83,8 @@ or `npm install git+https://github.com/kuvaldini/make-workflows.sh`
 4. https://github.com/allejo/gha-workflows
 5. this repo https://github.com/kuvaldini/make-workflows.sh
 
-## License
-Authored by [Kuvaldini](https://github.com/kuvaldini), 2021.  
+## License, Authors
+Authored by [@Kuvaldini](https://github.com/kuvaldini), 2021.  
 Please keep links to the source code [this repo](https://github.com/kuvaldini/make-workflows.sh)
+
+Creation of this repo was inspired by [@karfau](https://github.com/karfau)
