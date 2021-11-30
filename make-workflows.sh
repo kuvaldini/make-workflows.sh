@@ -5,8 +5,8 @@ set -euo pipefail
 --help(){
    cat<<'END'
 make-workflows:
-   This script expands '*.src.yml' from $1..$[N-1] (default: script's directory)
-   to $N (default:REPO_ROOT/.github/workflows) with corresponding name '*.yml'
+   This script expands '*.src.yml' from $1..$[N-1] (default: REPO_ROOT/.github/)
+   to $N (default:REPO_ROOT/.github/workflows/) with corresponding name '*.yml'
    Main goal is to dereference YAML anchors.
    Deals only with Git cached/indexed files until --worktree passed.
    DEBUG: use option -x
@@ -80,7 +80,7 @@ while [[ $# > 0 ]] ;do
          fi
          ;;
       -V|--version)
-         echo "make-workflows.sh version 1.0.0"
+         echo "make-workflows.sh 1.0.0"
          exit
          ;;
       -*)

@@ -17,21 +17,23 @@ So I suggest yet another one `make-workflows.sh` based on YAML tool [`yq`](https
 ```
 $ ./make-workflows.sh --help
 make-workflows:
-    This script expands '*.src.yml' from $1..$[N-1] (default: script's directory)
-    to $N (default:REPO_ROOT/.github/workflows) with corresponding name '*.yml'
-    Main goal is to dereference YAML anchors.
-    Deals only with Git cached/indexed files until --no-git-index passed.
-    DEBUG: use option -x
-    NOTE: spaces in filenames are not allowed to keep code simplicity.
+   This script expands '*.src.yml' from $1..$[N-1] (default: REPO_ROOT/.github/)
+   to $N (default:REPO_ROOT/.github/workflows/) with corresponding name '*.yml'
+   Main goal is to dereference YAML anchors.
+   Deals only with Git cached/indexed files until --worktree passed.
+   DEBUG: use option -x
+   NOTE: spaces in filenames are not allowed to keep code simplicity.
 Usage:
     make-workflows.sh [--worktree] [dirs_from... [dir_to]]
     make-workflows.sh [--help]
 Options:
-    --no-git-index|--worktree   List files and get contents from working tree
-                                instead of git index
-    -h, --help       show this help
-    -x, --trace
-    +x, --no-trace   enable/disable bash trace
+   --worktree       List files and get contents from working tree
+                    instead of git index
+   -h, --help       show this help
+   -x, --trace, +x, --no-trace   enable/disable bash trace
+   -i, --install
+   --update
+   -V, --version
 ```
 
 ### Automate using pre-commit (recommended)
@@ -53,7 +55,10 @@ repos:
     files: '.github/.*\.src\.ya?ml'
     pass_filenames: false
 ```
-> NOTE: pay attention to path to make-workflows.sh if it is installed to your system
+> NOTE: pay attention to path to `make-workflows.sh`
+
+> NOTE2: pay attention to path(s) where source files are stored `files: 'PATH_REGEXP'`
+
 
 ## Ways to install
 1. raw by hand
